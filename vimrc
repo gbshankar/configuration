@@ -3,7 +3,7 @@ set nostartofline
 "if exists('$COLORTERM') && exists('$MRXVT_TABTITLE')
 set t_Co=256
 "endif
-set termguicolors
+"set termguicolors
 set viminfo='20,<1000,s1000,h
 "set t_AB=^[[48;5;%dm
 "set t_AF=^[[38;5;%dm
@@ -25,7 +25,7 @@ set shortmess=aI
 set cmdheight=2
 
 "set clipboard=autoselect
-set clipboard=unnamedplus
+"set clipboard=unnamed
 set title
 set incsearch ignorecase hlsearch
 " Press space to clear search highlighting and any message already displayed.
@@ -68,6 +68,7 @@ augroup resCur
     autocmd BufWinEnter * call ResCur()
 augroup END
 
+set tags=tags
 "if has('cscope')
 "      set cscopetag cscopeverbose
 
@@ -131,11 +132,10 @@ endif
 "To enable indent on sh/bash scripts
 let g:sh_indent_case_labels=1
 
-"execute pathogen#infect()
 
 " turn off search highlight with space key
 nnoremap <leader><space> :nohlsearch<CR>
-colorscheme codeschool
+"colorscheme codeschool
 
 "Scroolose/syntastic suggested settings
 "set statusline+=%#warningmsg#
@@ -148,15 +148,51 @@ colorscheme codeschool
 "let g:syntastic_check_on_wq = 0
 "
 "Persistent Undo
-if exists("&undodir")
-    set undofile          "Persistent undo! Pure money.
-    let &undodir=&directory
-    set undolevels=500
-    set undoreload=500
-endif
+"if exists("&undodir")
+set undodir=~/.vim/undo
+set undofile          "Persistent undo! Pure money.
+set undolevels=5000
+set undoreload=5000
+"endif
 
 set ttyfast
 set autoread "reload files when changed on disk
 set mousehide             "hide mouse when typing
 
 set guioptions+=F
+
+
+autocmd BufRead,BufNewFile *sr?/server/*.py set colorcolumn=100
+autocmd BufRead,BufNewFile *src/client/*.py set colorcolumn=120
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" add all your plugins here (note older versions of Vundle
+" used Bundle instead of Plugin)
+Plugin 'vim-scripts/indentpython.vim'
+"Plugin 'vim-syntastic/syntastic'
+"Plugin 'nvie/vim-flake8'
+Plugin 'w0rp/ale'
+Plugin 'google/yapf', { 'rtp': 'plugins/vim' }
+Plugin 'mileszs/ack.vim'
+let python_highlight_all=1
+" ...
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+"http://liuchengxu.org/posts/use-vim-as-a-python-ide/
+autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
+" If you want to fix files automatically on save:
+let g:ale_fix_on_save = 1
+
+let g:ackprg = 'ag --nogroup --nocolor --column'
