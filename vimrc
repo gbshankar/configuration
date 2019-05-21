@@ -156,7 +156,7 @@ set undoreload=5000
 "endif
 
 set ttyfast
-set autoread "reload files when changed on disk
+set autoread | au CursorHold * checktime | call feedkeys("lh")
 set mousehide             "hide mouse when typing
 
 set guioptions+=F
