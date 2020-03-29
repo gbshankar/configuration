@@ -1,40 +1,33 @@
-set nocompatible
-set nostartofline
-"if exists('$COLORTERM') && exists('$MRXVT_TABTITLE')
-set t_Co=256
-"endif
-"set termguicolors
-set viminfo='20,<1000,s1000,h
-"set t_AB=^[[48;5;%dm
-"set t_AF=^[[38;5;%dm
-set laststatus=2
-set cmdheight=2
-"set nowrapscan
 set autoindent
-set smartindent
-set cindent
-set noerrorbells
 set backspace=indent,eol,start
+set clipboard=autoselect
+set cindent
+set cmdheight=2
+set cmdheight=2
 set history=50
+set laststatus=2
+set nobackup
+set nocompatible
+set noerrorbells
+set nostartofline
+set noswapfile
 set ruler
+set shortmess=aI
 set showcmd
 set smartcase
-set nobackup
-set noswapfile
-set shortmess=aI
-set cmdheight=2
-
-"set clipboard=autoselect
-"set clipboard=unnamed
+set smartindent
+set t_Co=256
 set title
+set viminfo='20,<1000,s1000,h
+"set nowrapscan
+"set clipboard=unnamed
 set incsearch ignorecase hlsearch
 " Press space to clear search highlighting and any message already displayed.
 nnoremap <silent><Space> :silent noh<Bar>echo<CR>
-autocmd BufRead *.cpp,*.h,*.c set textwidth=80
 autocmd VimResized * wincmd =
 autocmd BufReadPre make* setlocal textwidth=0
 filetype plugin indent on
-"set textwidth=80
+set textwidth=100
 set colorcolumn=+1
 set cursorline
 set confirm
@@ -69,22 +62,6 @@ augroup resCur
 augroup END
 
 set tags=tags
-"if has('cscope')
-"      set cscopetag cscopeverbose
-
-"    if has('quickfix')
-"          set cscopequickfix=s-,c-,d-,i-,t-,e-
-"    endif
-
-"    cnoreabbrev csa cs add
-"    cnoreabbrev csf cs find
-"    cnoreabbrev csk cs kill
-"    cnoreabbrev csr cs reset
-"    cnoreabbrev css cs show
-"    cnoreabbrev csh cs help
-   
-"    command -nargs=0 Cscope cs add /auto/mcpbuilds/binos-snaps/polaris_dev/cscope.out   
-"endif
 
 if ! has('gui_running')
     set ttimeoutlen=10
@@ -178,11 +155,14 @@ Plugin 'gmarik/Vundle.vim'
 " add all your plugins here (note older versions of Vundle
 " used Bundle instead of Plugin)
 Plugin 'vim-scripts/indentpython.vim'
-"Plugin 'vim-syntastic/syntastic'
-"Plugin 'nvie/vim-flake8'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'nvie/vim-flake8'
 Plugin 'w0rp/ale'
 Plugin 'google/yapf', { 'rtp': 'plugins/vim' }
 Plugin 'mileszs/ack.vim'
+Plugin 'itchyny/lightline.vim'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'fatih/vim-go'
 let python_highlight_all=1
 " ...
 
