@@ -161,8 +161,8 @@ Plugin 'w0rp/ale'
 Plugin 'google/yapf', { 'rtp': 'plugins/vim' }
 Plugin 'mileszs/ack.vim'
 Plugin 'itchyny/lightline.vim'
-Plugin 'sheerun/vim-polyglot'
 Plugin 'fatih/vim-go'
+Plugin 'sheerun/vim-polyglot'
 let python_highlight_all=1
 " ...
 
@@ -176,3 +176,4 @@ autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
 let g:ale_fix_on_save = 1
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
+
