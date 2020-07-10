@@ -17,7 +17,7 @@ PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
 
 setopt auto_cd
-cdpath=($HOME/src $HOME/go/src/github.com/lyft)
+cdpath=($HOME/src $HOME/go/src/github.com/lyft $HOME/personal)
 
 source '/Users/shankargarikapati/src/awsaccess/awsaccess2.sh' # awsaccess
 source '/Users/shankargarikapati/src/awsaccess/oktaawsaccess.sh' # oktaawsaccess
@@ -28,3 +28,9 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Add support for Go modules and Lyft's Athens module proxy/store
+# These variables were added by 'hacktools/set_go_env_vars.sh'
+export GOPROXY='https://athens.ingress.infra.us-east-1.k8s.lyft.net'
+export GONOSUMDB='github.com/lyft/*,github.lyft.net/*'
+export GO111MODULE='auto'

@@ -126,7 +126,10 @@ nnoremap <leader><space> :nohlsearch<CR>
 "
 "Persistent Undo
 "if exists("&undodir")
-set undodir=~/.vim/undo
+if !isdirectory($HOME."/.vim/undo-dir")
+    call mkdir($HOME."/.vim/undo-dir", "", 0700)
+endif
+set undodir=~/.vim/undo-dir
 set undofile          "Persistent undo! Pure money.
 set undolevels=5000
 set undoreload=5000
