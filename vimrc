@@ -1,13 +1,12 @@
+set nocompatible
 set autoindent
 set backspace=indent,eol,start
 set clipboard=autoselect
 set cindent
 set cmdheight=2
-set cmdheight=2
-set history=50
+set history=500
 set laststatus=2
 set nobackup
-set nocompatible
 set noerrorbells
 set nostartofline
 set noswapfile
@@ -19,7 +18,7 @@ set smartindent
 set t_Co=256
 set title
 set viminfo='20,<1000,s1000,h
-"set nowrapscan
+" set nowrapscan
 "set clipboard=unnamed
 set incsearch ignorecase hlsearch
 " Press space to clear search highlighting and any message already displayed.
@@ -44,6 +43,7 @@ syntax on
 set comments=sl:/*,mb:\ *,elx:\ */
 set viminfo='10,\"100,:20,%,n~/.viminfo
 
+nnoremap <F1> :set nu! nu?<CR>
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
@@ -93,7 +93,7 @@ set foldnestmax=3  "deepest fold is 3 levels
 set nofoldenable   "dont fold by default
 
 "------------------Scrolling------------------
-set scrolloff=8 "start scrolling when we're 8 lines away from margins
+set scrolloff=999 "start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
 
@@ -166,7 +166,16 @@ Plugin 'mileszs/ack.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'fatih/vim-go'
 Plugin 'sheerun/vim-polyglot'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tpope/vim-fugitive'
+"Plugin 'neoclide/coc.nvim'
+Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
+"Plugin 'vim-gitgutter'
+Plugin 'junegunn/fzf.vim'
+
 let python_highlight_all=1
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 " ...
 
 " All of your Plugins must be added before the following line
@@ -177,6 +186,7 @@ filetype plugin indent on    " required
 autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
 " If you want to fix files automatically on save:
 let g:ale_fix_on_save = 1
-
 let g:ackprg = 'ag --nogroup --nocolor --column'
-
+set background=dark
+let g:hybrid_use_iTerm_colors = 1
+set rtp+=/usr/local/opt/fzf

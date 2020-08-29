@@ -8,6 +8,9 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 source ${ZDOTDIR:-$HOME}/.zprezto/init.zsh
 source ~/.alias
 
+zstyle ':completion:*' accept-exact '*(N)'
+
+
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 #source /usr/local/bin/virtualenvwrapper.sh
@@ -34,3 +37,8 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 export GOPROXY='https://athens.ingress.infra.us-east-1.k8s.lyft.net'
 export GONOSUMDB='github.com/lyft/*,github.lyft.net/*'
 export GO111MODULE='auto'
+
+export FZF_DEFAULT_COMMAND='fd . $HOME'
+export FZF_DEFAULT_OPTS='-m --height 50% --border'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd -t d . $HOME"
