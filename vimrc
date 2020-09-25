@@ -18,6 +18,7 @@ set smartindent
 set t_Co=256
 set title
 set viminfo='20,<1000,s1000,h
+set wrap
 " set nowrapscan
 "set clipboard=unnamed
 set incsearch ignorecase hlsearch
@@ -26,7 +27,7 @@ nnoremap <silent><Space> :silent noh<Bar>echo<CR>
 autocmd VimResized * wincmd =
 autocmd BufReadPre make* setlocal textwidth=0
 filetype plugin indent on
-set textwidth=100
+set textwidth=0
 set colorcolumn=+1
 set cursorline
 set confirm

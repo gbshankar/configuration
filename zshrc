@@ -8,8 +8,8 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 source ${ZDOTDIR:-$HOME}/.zprezto/init.zsh
 source ~/.alias
 
-zstyle ':completion:*' accept-exact '*(N)'
 
+zstyle ':completion:*' accept-exact '*(N)'
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
