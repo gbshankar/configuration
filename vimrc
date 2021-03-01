@@ -40,6 +40,11 @@ set showmatch
 set wildmenu
 set cpo+=n
 syntax on
+
+" Shift-Enter
+inoremap <S-CR> <Esc>
+
+
 " intelligent comments
 set comments=sl:/*,mb:\ *,elx:\ */
 set viminfo='10,\"100,:20,%,n~/.viminfo
@@ -192,5 +197,25 @@ set background=dark
 let g:hybrid_use_iTerm_colors = 1
 set rtp+=/usr/local/opt/fzf
 let g:syntastic_python_python_exec = 'python3'
-let g:syntastic_python_checkers = ['pyflakes', 'pep8', 'python']
+let g:syntastic_python_checkers = ['pyflakes', 'pep8', 'python', 'mypy', 'pylint']
 let g:syntastic_enable_balloons = 1
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '!'
+let g:syntastic_style_error_symbol = '☡'
+let g:syntastic_style_warning_symbol = '¡'
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" Toggle spell checking on and off with `,s`
+let mapleader = ","
+" set spell!
+nmap <silent> <leader>s :set spell!<CR>
+
+" Set region to all regions
+set spelllang=en
+
+let g:instant_markdown_slow = 1
+" https://github.com/suan/vim-instant-markdown/blob/081a6f7f228a19022e8ce7672798b83edd596586/README.md
+set shell=bash\ -i
