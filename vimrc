@@ -1,7 +1,7 @@
 set nocompatible
 set autoindent
 set backspace=indent,eol,start
-set clipboard=autoselect
+"set clipboard=autoselect
 set cindent
 set cmdheight=2
 set history=500
@@ -20,7 +20,7 @@ set title
 set viminfo='20,<1000,s1000,h
 set wrap
 " set nowrapscan
-"set clipboard=unnamed
+set clipboard=unnamed
 set incsearch ignorecase hlsearch
 " Press space to clear search highlighting and any message already displayed.
 nnoremap <silent><Space> :silent noh<Bar>echo<CR>
@@ -196,8 +196,8 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 set background=dark
 let g:hybrid_use_iTerm_colors = 1
 set rtp+=/usr/local/opt/fzf
-let g:syntastic_python_python_exec = 'python3'
-let g:syntastic_python_checkers = ['pyflakes', 'pep8', 'python', 'mypy', 'pylint']
+" let g:syntastic_python_python_exec = 'python3'
+" let g:syntastic_python_checkers = ['pyflakes', 'pep8', 'python', 'mypy', 'pylint']
 let g:syntastic_enable_balloons = 1
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '!'
