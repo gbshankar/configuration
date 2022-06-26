@@ -1,0 +1,18 @@
+--color
+--smart-case
+--pager
+less -FRSX
+
+--type-set=json:ext:json
+--type-add=go:ext:go
+--type-add=haskell:ext:hs,lhs
+--type-add=markdown:ext:md,markdown
+--type-add=python:ext:py
+--type-add=python:firstlinematch:/^#!.*\bpython/
+--type-add=rust:ext:rs
+--type-add=vim:ext:vim
+--type-add=yaml:ext:yaml,yml
+
+--ignore-directory=is:__pycache__
+--ignore-directory=is:.pytest_cache
+--ignore-directory=is:.mypy_cache
