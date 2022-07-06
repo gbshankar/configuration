@@ -176,7 +176,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 "Plugin 'neoclide/coc.nvim'
 Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
-"Plugin 'vim-gitgutter'
+Plugin 'vim-gitgutter'
 Plugin 'junegunn/fzf.vim'
 
 let python_highlight_all=1
@@ -192,6 +192,16 @@ filetype plugin indent on    " required
 autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
 " If you want to fix files automatically on save:
 let g:ale_fix_on_save = 1
+let g:ale_maximum_file_size = 500000  " Don't lint large files (> 500KB), it can slow things down
+let g:ale_linters                = {}
+let g:ale_linters['json']        = ['fixjson']
+let g:ale_fixers                 = {}
+let g:ale_fixers['*']            = ['remove_trailing_lines', 'trim_whitespace']
+let g:ale_fixers.c               = ['clang-format']
+let g:ale_fixers.cpp             = ['clang-format']
+let g:ale_fixers.go              = ['gofmt', 'goimports']
+let g:ale_fixers.markdown        = ['prettier']
+let g:ale_fixers.python          = ['autopep8']
 let g:ackprg = 'ag --nogroup --nocolor --column'
 set background=dark
 let g:hybrid_use_iTerm_colors = 1

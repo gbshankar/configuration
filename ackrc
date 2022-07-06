@@ -2,6 +2,9 @@
 --smart-case
 --pager
 less -FRSX
+--nobreak
+--noheading
+--follow
 
 --type-set=json:ext:json
 --type-add=go:ext:go
@@ -16,3 +19,6 @@ less -FRSX
 --ignore-directory=is:__pycache__
 --ignore-directory=is:.pytest_cache
 --ignore-directory=is:.mypy_cache
+--ignore-directory=is:.git
+--ignore-directory=is:venv
+--ignore-directory=ext:egg-info
