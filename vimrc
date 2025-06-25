@@ -163,25 +163,26 @@ Plugin 'gmarik/Vundle.vim'
 
 " add all your plugins here (note older versions of Vundle
 " used Bundle instead of Plugin)
-Plugin 'vim-scripts/indentpython.vim'
+"Plugin 'vim-scripts/indentpython.vim'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'nvie/vim-flake8'
-Plugin 'w0rp/ale'
+"Plugin 'w0rp/ale'
 Plugin 'google/yapf', { 'rtp': 'plugins/vim' }
-Plugin 'mileszs/ack.vim'
-Plugin 'itchyny/lightline.vim'
+"Plugin 'mileszs/ack.vim'
+"Plugin 'itchyny/lightline.vim'
 Plugin 'fatih/vim-go'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'github/copilot.vim'
+"Plugin 'sheerun/vim-polyglot'
+"Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 "Plugin 'neoclide/coc.nvim'
-Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
+"Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
 "Plugin 'vim-gitgutter'
-Plugin 'junegunn/fzf.vim'
+"Plugin 'junegunn/fzf.vim'
 
 let python_highlight_all=1
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+"let g:syntastic_cpp_compiler = 'clang++'
+"let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 " ...
 
 " All of your Plugins must be added before the following line
@@ -210,14 +211,14 @@ let g:hybrid_use_iTerm_colors = 1
 set rtp+=/usr/local/opt/fzf
 " let g:syntastic_python_python_exec = 'python3'
 " let g:syntastic_python_checkers = ['pyflakes', 'pep8', 'python', 'mypy', 'pylint']
-let g:syntastic_enable_balloons = 1
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '!'
-let g:syntastic_style_error_symbol = '☡'
-let g:syntastic_style_warning_symbol = '¡'
+" let g:syntastic_enable_balloons = 1
+" let g:syntastic_error_symbol = '✗'
+" let g:syntastic_warning_symbol = '!'
+" let g:syntastic_style_error_symbol = '☡'
+" let g:syntastic_style_warning_symbol = '¡'
 
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 " Toggle spell checking on and off with `,s`
@@ -231,3 +232,9 @@ set spelllang=en
 let g:instant_markdown_slow = 1
 " https://github.com/suan/vim-instant-markdown/blob/081a6f7f228a19022e8ce7672798b83edd596586/README.md
 set shell=bash\ -i
+
+let g:go_imports_autosave = 0
+let g:copilot_enabled = 0
+
+" Convert CamelCase to snake_case 
+nnoremap <leader>sc :%s/\([a-z]\)\([A-Z]\)/\1_\l\2/g<CR>

@@ -16,16 +16,11 @@ export PROJECT_HOME=$HOME/Devel
 #source /usr/local/bin/virtualenvwrapper.sh
 #source $HOME/Library/Python/3.7/bin
 
-PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/python/libexec/bin:$PATH"
 
 
 setopt autocd
 cdpath=($HOME/src $HOME/go/src/github.com/lyft $HOME/personal)
 
-source '/Users/sgarikapati/src/awsaccess/awsaccess2.sh' # awsaccess
-source '/Users/sgarikapati/src/awsaccess/oktaawsaccess.sh' # oktaawsaccess
-#export PS1="\$(ps1_mfa_context)$PS1" # awsaccess
-PATH=$HOME/bin:$PATH:/Users/shankargarikapati/.lyftkube-bin
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -35,8 +30,9 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # Add support for Go modules and Lyft's Athens module proxy/store
 # These variables were added by 'hacktools/set_go_env_vars.sh'
 export GOPATH='/Users/sgarikapati/go'
-export GOPROXY='https://athens.ingress.infra.us-east-1.k8s.lyft.net'
+export GOPROXY='http://athens.ingress.infra-prd.us-east-1.k8s.lyft.net,direct'
 export GONOSUMDB='github.com/lyft/*,github.lyft.net/*'
+export GONOSUM='github.com/lyft/*,github.lyft.net/*'
 export GO111MODULE='auto'
 
 export FZF_DEFAULT_COMMAND='fd . $HOME'
@@ -45,8 +41,36 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 
 #eval "$(/opt/lyft/brew/bin/aactivator init)"
-PATH=$PATH:/Users/sgarikapati/.lyftkube-bin
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
-export DBUSER=sgarikapati@lyft.com
+export PATH="/opt/homebrew/sbin:/Users/sgarikapati/.rd/bin:$GOPATH/bin:$PATH"
+export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+### lyft_localdevtools_shell_rc start
+### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
+if [[ -f "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh" ]]; then
+    source "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
+fi
+### lyft_localdevtools_shell_rc end
 
-#export PATH=$PATH:/Users/sgarikapati/src/airflowinfra/tars/k8s/source '/Users/sgarikapati/.sh/custom/npm-logout.sh'
+### lyft_rd_shell_rc start
+### DO NOT REMOVE: automatically installed as part of Rancher Desktop setup
+if [[ -f /Users/sgarikapati/.rd/shell_rc.sh ]]; then
+  source /Users/sgarikapati/.rd/shell_rc.sh
+fi
+### lyft_rd_shell_rc end
+eval export PATH="/Users/sgarikapati/.jenv/shims:${PATH}"
+export JENV_SHELL=zsh
+export JENV_LOADED=1
+#npm config set registry https://artifactory.lyft.net/artifactory/api/npm/virtual-npm-lyft/
+
+### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
+eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
+alias ack="echo 'use rg'"
+#alias python=python3
+
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+. "$HOME/.local/bin/env"
+export GOPATH=/Users/sgarikapati/go
+export PATH=$GOPATH/bin:$PATH
+export HOMEBREW_NO_AUTO_UPDATE=1
