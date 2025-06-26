@@ -1,0 +1,65 @@
+# This is Git's per-user configuration file.
+[user]
+name = Shankar Garikapati
+email = sgarikapati@lyft.com
+
+[color]
+	ui = true
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = red
+
+[core]
+	editor = vim -u NONE -U NONE -N -i NONE
+	pager = delta
+        fsmonitor  = true
+[pager]
+	branch = false
+[pull]
+	rebase = true
+[feature]
+	manyFiles = 1
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[alias]
+	d = difftool
+[core]
+    fsmonitor = true
+    untrackedCache = true
+    commitGraph = true
+    preloadIndex = true
+    deltaBaseCacheLimit = 1g
+[gc]
+    writeCommitGraph = true
+[feature]
+    manyFiles = true
+[pack]
+    windowMemory = 100m
+    packSizeLimit = 100m
+    deltaCacheSize = 1g
+[fetch]
+    parallel = 0
+[submodule]
+    fetchJobs = 0
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
+
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	side-by-side = true
