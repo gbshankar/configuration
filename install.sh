@@ -20,6 +20,7 @@ symlink() {
     # If target exists and is not already the correct symlink
     if [[ -e "$dst" ]] && [[ ! -L "$dst" ]]; then
         echo -e "${YELLOW}Backing up${NC} $dst → $dst.bak"
+        [[ -e "$dst.bak" ]] && rm -rf "$dst.bak"
         mv "$dst" "$dst.bak"
     elif [[ -L "$dst" ]]; then
         local current

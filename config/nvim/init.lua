@@ -1,6 +1,6 @@
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     "git", "clone", "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
@@ -79,7 +79,6 @@ vim.keymap.set("n", "<F1>", ":set nu! nu?<CR>")
 
 -- Toggle paste mode (F2, same as .vimrc)
 vim.keymap.set("n", "<F2>", ":set invpaste paste?<CR>")
-vim.opt.pastetoggle = "<F2>"
 
 -- CamelCase to snake_case (same as .vimrc)
 vim.keymap.set("n", "<leader>sc", ":%s/\\([a-z]\\)\\([A-Z]\\)/\\1_\\l\\2/g<CR>")
