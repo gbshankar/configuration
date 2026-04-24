@@ -24,7 +24,6 @@ return {
         automatic_installation = true,
       })
 
-      local lspconfig    = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       local on_attach = function(_, bufnr)
@@ -74,7 +73,8 @@ return {
       for server, config in pairs(servers) do
         config.on_attach    = on_attach
         config.capabilities = capabilities
-        lspconfig[server].setup(config)
+        vim.lsp.config(server, config)
+        vim.lsp.enable(server)
       end
     end,
   },
