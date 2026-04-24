@@ -41,8 +41,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 
 #eval "$(/opt/lyft/brew/bin/aactivator init)"
-export PATH="/opt/homebrew/sbin:/Users/sgarikapati/.rd/bin:$GOPATH/bin:$PATH"
-export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+export PATH="/opt/homebrew/sbin:/opt/homebrew/sbin:/Users/sgarikapati/.rd/bin:$GOPATH/bin:$PATH"
 ### lyft_localdevtools_shell_rc start
 ### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
 if [[ -f "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh" ]]; then
@@ -70,7 +69,15 @@ alias ack="echo 'use rg'"
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-. "$HOME/.local/bin/env"
-export GOPATH=/Users/sgarikapati/go
-export PATH=$GOPATH/bin:$PATH
 export HOMEBREW_NO_AUTO_UPDATE=1
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+
+# Created by `pipx` on 2025-10-13 02:06:17
+export PATH="$PATH:/Users/sgarikapati/.local/bin"
+
+# Added by Antigravity
+export PATH="/Users/sgarikapati/.antigravity/antigravity/bin:$PATH"

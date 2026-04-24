@@ -1,65 +1,66 @@
-# This is Git's per-user configuration file.
 [user]
-name = Shankar Garikapati
-email = sgarikapati@lyft.com
+	name = Bhavani Shankar Garikapati
+	email = 6279355+gbshankar@users.noreply.github.com
 
 [color]
-	ui = true
-
-[color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
-
-[color "diff"]
-	meta = yellow bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
-
-[color "status"]
-	added = yellow
-	changed = green
-	untracked = red
-
+    ui = true
 [core]
-	editor = vim -u NONE -U NONE -N -i NONE
-	pager = delta
-        fsmonitor  = true
-[pager]
-	branch = false
-[pull]
-	rebase = true
-[feature]
-	manyFiles = 1
-[diff]
-	tool = vimdiff
-[difftool]
-	prompt = false
-[alias]
-	d = difftool
-[core]
-    fsmonitor = true
-    untrackedCache = true
-    commitGraph = true
     preloadIndex = true
-    deltaBaseCacheLimit = 1g
-[gc]
-    writeCommitGraph = true
-[feature]
-    manyFiles = true
+    fscache = true
+    untrackedCache = true
+    pager = delta
+    compression = -1
+    editor = vim
 [pack]
-    windowMemory = 100m
-    packSizeLimit = 100m
-    deltaCacheSize = 1g
+    threads = 16
+[gc]
+    auto = 6700
+[status]
+    showUntrackedFiles = normal
 [fetch]
-    parallel = 0
-[submodule]
-    fetchJobs = 0
-[url "ssh://git@github.com/"]
-    insteadOf = https://github.com/
-
+    parallel = 4
+    prune = true
+[maintenance]
+    auto = true
+[merge]
+    tool = vimdiff
+    conflictstyle = diff3
+[rebase]
+    autosquash = true
 [interactive]
-	diffFilter = delta --color-only
+    diffFilter = delta --color-only
 [delta]
-	side-by-side = true
+    features = default
+    line-numbers = true
+    side-by-side = true
+    navigate = true
+    hyperlinks = true
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+[pull]
+    rebase = true
+[push]
+    default = current
+    autoSetupRemote = true
+[branch]
+    sort = -committerdate
+[diff]
+    algorithm = histogram
+    colorMoved = default
+[rerere]
+    enabled = true
+    autoupdate = true
+[log]
+    abbrevCommit = true
+[help]
+    autocorrect = prompt
+[alias]
+    lg = log --oneline --graph --decorate --all
+    sw = switch
+    recent = branch --sort=-committerdate
+    undo = reset --soft HEAD~1
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
