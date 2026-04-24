@@ -1,65 +1,40 @@
-# This is Git's per-user configuration file.
 [user]
-name = Shankar Garikapati
-email = sgarikapati@lyft.com
+name = Bhavani Shankar Garikapati
+email = 6279355+gbshankar@users.noreply.github.com
 
-[color]
-	ui = true
-
-[color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
-
-[color "diff"]
-	meta = yellow bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
-
-[color "status"]
-	added = yellow
-	changed = green
-	untracked = red
+[github]
+user = gbshankar
 
 [core]
-	editor = vim -u NONE -U NONE -N -i NONE
-	pager = delta
-        fsmonitor  = true
-[pager]
-	branch = false
+editor = nvim
+excludesfile = ~/.gitignore_global
+
+[commit]
+verbose = true
+
+[column]
+ui = auto
+
+[init]
+defaultBranch = master
+
+[push]
+default = current
+
 [pull]
-	rebase = true
-[feature]
-	manyFiles = 1
-[diff]
-	tool = vimdiff
-[difftool]
-	prompt = false
-[alias]
-	d = difftool
-[core]
-    fsmonitor = true
-    untrackedCache = true
-    commitGraph = true
-    preloadIndex = true
-    deltaBaseCacheLimit = 1g
-[gc]
-    writeCommitGraph = true
-[feature]
-    manyFiles = true
-[pack]
-    windowMemory = 100m
-    packSizeLimit = 100m
-    deltaCacheSize = 1g
-[fetch]
-    parallel = 0
-[submodule]
-    fetchJobs = 0
-[url "ssh://git@github.com/"]
-    insteadOf = https://github.com/
+rebase = true
 
-[interactive]
-	diffFilter = delta --color-only
-[delta]
-	side-by-side = true
+[rebase]
+autoStash = true
+
+[diff]
+algorithm = histogram
+
+[merge]
+conflictstyle = zdiff3
+
+[rerere]
+enabled = true
+
+[help]
+autocorrect = prompt
