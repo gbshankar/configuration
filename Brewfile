@@ -1,88 +1,59 @@
-tap "adoptopenjdk/openjdk"
+# Taps
 tap "kyoh86/tap"
-tap "lyft/localdevtools", "git@github.com:lyft/localdevtools"
-brew "ack"
-brew "python@3.13"
-brew "awscli"
-brew "bazelisk"
-brew "freetype"
-brew "glib"
+
+# Shell
+brew "zsh"
+brew "zsh-syntax-highlighting"
+brew "zsh-autosuggestions"
+brew "starship"
+
+# Runtime version manager (replaces pyenv + jenv + fnm)
+brew "mise"
+
+# Editor
+brew "neovim"
+brew "vim"
+
+# Search & navigation
 brew "fd"
-brew "fnm"
-brew "gh"
-brew "harfbuzz"
+brew "ripgrep"
+brew "fzf"
+
+# Git
 brew "git-delta"
+brew "gh"
+
+# Languages & build
+brew "python"
 brew "go"
-brew "golangci-lint"
-brew "grpcurl"
-brew "python@3.12"
-brew "imagemagick"
-brew "jenv"
-brew "libpq", link: true
 brew "openjdk"
 brew "maven"
-brew "mockery"
-brew "mtr"
-brew "pkgconf"
-brew "pyenv"
-brew "python@3.10", link: false
-brew "python@3.11", link: false
-brew "ripgrep"
-brew "rpl"
+
+# Go tools
+brew "golangci-lint"
 brew "staticcheck"
+brew "mockery"
+brew "kyoh86/tap/richgo"
+
+# Cloud & infra
+brew "awscli"
 brew "terraform"
 brew "tflint"
+brew "grpcurl"
+
+# Shell history
+brew "atuin"
+
+# Multiplexer
 brew "tmux"
-brew "vim"
+
+# Misc
+brew "bazelisk"
+brew "freetype"
+brew "harfbuzz"
+brew "imagemagick"
+brew "libpq", link: true
+brew "mtr"
+brew "pkgconf"
+brew "rpl"
 brew "yarn"
-brew "zsh"
-brew "kyoh86/tap/richgo"
-brew "lyft/localdevtools/aws-okta"
-brew "lyft/localdevtools/protoc-gen-lyftpython"
-brew "lyft/localdevtools/idltools"
-brew "lyft/localdevtools/kubernetes-cli@1.22"
-brew "lyft/localdevtools/lyft-dev-cli"
-brew "lyft/localdevtools/lyft-gitwrapper"
-brew "lyft/localdevtools/lyftkube"
-brew "lyft/localdevtools/lyftdevtools"
-brew "lyft/localdevtools/python-310-bundle-arm64"
-brew "lyft/localdevtools/python-311-bundle-arm64"
-brew "lyft/localdevtools/python-bundle-arm64"
-cask "inkscape"
-vscode "anysphere.pyright"
-vscode "cschlosser.doxdocgen"
-vscode "davidanson.vscode-markdownlint"
-vscode "dbaeumer.vscode-eslint"
-vscode "eamodio.gitlens"
-vscode "golang.go"
-vscode "jeff-hykin.better-cpp-syntax"
-vscode "ms-azuretools.vscode-containers"
-vscode "ms-azuretools.vscode-docker"
-vscode "ms-python.debugpy"
-vscode "ms-python.python"
-vscode "ms-python.vscode-pylance"
-vscode "ms-toolsai.jupyter"
-vscode "ms-toolsai.vscode-jupyter-cell-tags"
-vscode "ms-toolsai.vscode-jupyter-slideshow"
-vscode "ms-vscode-remote.remote-containers"
-vscode "ms-vscode-remote.remote-ssh"
-vscode "ms-vscode-remote.remote-ssh-edit"
-vscode "ms-vscode-remote.remote-wsl"
-vscode "ms-vscode.cmake-tools"
-vscode "ms-vscode.cpptools"
-vscode "ms-vscode.cpptools-extension-pack"
-vscode "ms-vscode.cpptools-themes"
-vscode "ms-vscode.remote-explorer"
-vscode "msyrus.go-doc"
-vscode "redhat.java"
-vscode "redhat.vscode-yaml"
-vscode "twxs.cmake"
-vscode "visualstudioexptteam.intellicode-api-usage-examples"
-vscode "visualstudioexptteam.vscodeintellicode"
-vscode "vscjava.vscode-gradle"
-vscode "vscjava.vscode-java-debug"
-vscode "vscjava.vscode-java-dependency"
-vscode "vscjava.vscode-java-pack"
-vscode "vscjava.vscode-java-test"
-vscode "vscjava.vscode-maven"
-vscode "vscodevim.vim"

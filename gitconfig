@@ -4,61 +4,89 @@
 
 [color]
     ui = true
+
 [core]
     preloadIndex = true
     fscache = true
     untrackedCache = true
     pager = delta
-    compression = -1
-    editor = vim
+    editor = nvim
+
 [pack]
     threads = 16
+
 [gc]
     auto = 6700
+
 [status]
     showUntrackedFiles = normal
+
 [fetch]
     parallel = 4
     prune = true
+
 [maintenance]
     auto = true
+
 [merge]
     tool = vimdiff
     conflictstyle = diff3
+
 [rebase]
     autosquash = true
+
 [interactive]
     diffFilter = delta --color-only
+
 [delta]
     features = default
     line-numbers = true
     side-by-side = true
     navigate = true
     hyperlinks = true
+
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
+
 [pull]
     rebase = true
+
 [push]
     default = current
     autoSetupRemote = true
+
 [branch]
     sort = -committerdate
+
 [diff]
     algorithm = histogram
     colorMoved = default
+
 [rerere]
     enabled = true
     autoupdate = true
+
 [log]
     abbrevCommit = true
+
+[commit]
+    verbose = true
+
+[column]
+    ui = auto
+
+[init]
+    defaultBranch = main
+
 [help]
     autocorrect = prompt
+
 [alias]
     lg = log --oneline --graph --decorate --all
     sw = switch
     recent = branch --sort=-committerdate
     undo = reset --soft HEAD~1
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

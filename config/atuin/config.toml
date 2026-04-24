@@ -1,0 +1,12 @@
+# atuin — searchable shell history
+# Replaces Ctrl-R with fuzzy-searchable history across sessions
+
+[history]
+filter_mode = "host"        # show only history from this machine by default
+filter_mode_shell_up_key_binding = "session"  # up-arrow shows session history
+
+[search]
+search_mode = "fuzzy"       # fuzzy match on all history fields
+
+[sync]
+records = true
