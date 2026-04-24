@@ -1,43 +1,67 @@
 #!/usr/bin/env bash
+# install.sh — idempotent symlink installer for dotfiles
+# Usage: bash ~/personal/configuration/install.sh
+# Safe to re-run. Backs up existing files to <file>.bak before linking.
+
 set -euo pipefail
 
-# Idempotent dotfiles installer
-# Creates symlinks from ~/personal/configuration/overhaul to home directory
-# Silently skips existing symlinks that point to the correct location
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
 
-REPO_DIR="${HOME}/personal/configuration/overhaul"
-LINKS=(
-    ".tmux.conf:tmux.conf"
-    ".config/git/config:gitconfig"
-    ".zshrc:zshrc"
-    ".config/starship.toml:starship.toml"
-    ".config/atuin/config.toml:atuin.toml"
-    ".config/nvim/init.lua:nvim/init.lua"
-    ".local/bin/tmux-sessionizer:tmux-sessionizer"
-)
+symlink() {
+    local src="$REPO_DIR/$1"
+    local dst="$2"
 
-main() {
-    for link_spec in "${LINKS[@]}"; do
-        IFS=':' read -r target source <<< "$link_spec"
-        local_path="${HOME}/${target}"
-        repo_path="${REPO_DIR}/${source}"
+    # Ensure parent directory exists
+    mkdir -p "$(dirname "$dst")"
 
-        # Create parent directory if needed
-        mkdir -p "$(dirname "$local_path")"
-
-        # Skip if symlink already points to the correct location
-        if [[ -L "$local_path" ]] && [[ "$(readlink "$local_path")" == "$repo_path" ]]; then
-            continue
+    # If target exists and is not already the correct symlink
+    if [[ -e "$dst" ]] && [[ ! -L "$dst" ]]; then
+        echo -e "${YELLOW}Backing up${NC} $dst → $dst.bak"
+        mv "$dst" "$dst.bak"
+    elif [[ -L "$dst" ]]; then
+        local current
+        current="$(readlink "$dst")"
+        if [[ "$current" == "$src" ]]; then
+            echo -e "${GREEN}Already linked${NC}: $dst"
+            return
+        else
+            echo -e "${YELLOW}Removing stale symlink${NC} $dst (was → $current)"
+            rm "$dst"
         fi
+    fi
 
-        # Remove existing file/symlink if it exists
-        if [[ -e "$local_path" ]] || [[ -L "$local_path" ]]; then
-            rm -f "$local_path"
-        fi
-
-        # Create the symlink
-        ln -s "$repo_path" "$local_path"
-    done
+    echo -e "${GREEN}Linking${NC}: $dst → $src"
+    ln -s "$src" "$dst"
 }
 
-main "$@"
+echo "Installing dotfiles from $REPO_DIR"
+echo ""
+
+# Shell
+symlink zshrc          ~/.zshrc
+symlink alias          ~/.alias
+symlink ripgreprc      ~/.ripgreprc
+
+# Git
+symlink gitconfig      ~/.gitconfig
+
+# Tmux
+symlink tmux.conf      ~/.tmux.conf
+
+# Neovim
+symlink config/nvim    ~/.config/nvim
+
+# Starship
+symlink config/starship.toml ~/.config/starship.toml
+
+# mise
+symlink config/mise/config.toml ~/.config/mise/config.toml
+
+# atuin
+symlink config/atuin/config.toml ~/.config/atuin/config.toml
+
+echo ""
+echo "Done. Open a new terminal or run: source ~/.zshrc"

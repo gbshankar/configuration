@@ -1,51 +1,59 @@
-tap "lyft/localdevtools", "git@github.com:lyft/localdevtools"
+# Taps
+tap "kyoh86/tap"
 
-# Languages & Runtimes
-brew "go"
-brew "python@3.13"
-brew "python@3.12"
-brew "fnm"
-
-# CLI Tools
-brew "fd"
-brew "gh"
-brew "git-delta"
-brew "ripgrep"
-brew "tmux"
+# Shell
 brew "zsh"
+brew "zsh-syntax-highlighting"
+brew "zsh-autosuggestions"
+brew "starship"
 
-# Development Tools
-brew "awscli"
-brew "bazelisk"
-brew "golangci-lint"
-brew "grpcurl"
-brew "jenv"
-brew "maven"
-brew "mockery"
+# Runtime version manager (replaces pyenv + jenv + fnm)
+brew "mise"
+
+# Editor
+brew "neovim"
+brew "vim"
+
+# Search & navigation
+brew "fd"
+brew "ripgrep"
+brew "fzf"
+
+# Git
+brew "git-delta"
+brew "gh"
+
+# Languages & build
+brew "python"
+brew "go"
 brew "openjdk"
-brew "pkgconf"
-brew "pyenv"
+brew "maven"
+
+# Go tools
+brew "golangci-lint"
 brew "staticcheck"
+brew "mockery"
+brew "kyoh86/tap/richgo"
+
+# Cloud & infra
+brew "awscli"
 brew "terraform"
 brew "tflint"
+brew "grpcurl"
 
-# Utilities
-brew "ack"
+# Shell history
+brew "atuin"
+
+# Multiplexer
+brew "tmux"
+
+# Misc
+brew "bazelisk"
+brew "freetype"
+brew "harfbuzz"
 brew "imagemagick"
 brew "libpq", link: true
 brew "mtr"
-brew "vim"
+brew "pkgconf"
+brew "rpl"
 brew "yarn"
-
-# Lyft-specific tools
-brew "lyft/localdevtools/aws-okta"
-brew "lyft/localdevtools/protoc-gen-lyftpython"
-brew "lyft/localdevtools/idltools"
-brew "lyft/localdevtools/kubernetes-cli@1.22"
-brew "lyft/localdevtools/lyft-dev-cli"
-brew "lyft/localdevtools/lyft-gitwrapper"
-brew "lyft/localdevtools/lyftkube"
-brew "lyft/localdevtools/lyftdevtools"
-
-# Casks
-cask "inkscape"
