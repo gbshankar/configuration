@@ -1,76 +1,117 @@
-if type brew &>/dev/null; then
-      FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+##############################################################################
+# ~/.zshrc — framework-free zsh config
+# Managed via ~/personal/configuration — edit there, not here
+##############################################################################
 
-        autoload -Uz compinit
-          compinit
+##############################################################################
+# 1. Homebrew (hardcoded prefix — avoids slow `brew --prefix` subshell)
+##############################################################################
+export HOMEBREW_PREFIX="/opt/homebrew"
+export HOMEBREW_NO_AUTO_UPDATE=1
+export FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH"
+
+##############################################################################
+# 2. PATH — set once, no duplicates
+##############################################################################
+export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$HOME/.local/bin:$HOME/.antigravity/antigravity/bin:$HOME/.rd/bin:$PATH"
+
+##############################################################################
+# 3. compinit with 24h cache (skips regeneration on every shell open)
+##############################################################################
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
 fi
-fpath=(/usr/local/share/zsh-completions $fpath)
-source ${ZDOTDIR:-$HOME}/.zprezto/init.zsh
-source ~/.alias
 
-
-zstyle ':completion:*' accept-exact '*(N)'
-
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-#source /usr/local/bin/virtualenvwrapper.sh
-#source $HOME/Library/Python/3.7/bin
-
-
-
+##############################################################################
+# 4. Zsh options
+##############################################################################
 setopt autocd
-cdpath=($HOME/src $HOME/go/src/github.com/lyft $HOME/personal)
+setopt extended_glob
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt share_history
+setopt hist_verify
 
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=50000
+export SAVEHIST=50000
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+##############################################################################
+# 5. cdpath — jump to project dirs without full path
+##############################################################################
+cdpath=($HOME/src $HOME/personal)
 
+##############################################################################
+# 6. Completion style
+##############################################################################
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$HOME/.zcompcache"
+zstyle ':completion:*' menu select
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Add support for Go modules and Lyft's Athens module proxy/store
-# These variables were added by 'hacktools/set_go_env_vars.sh'
-export GOPATH='/Users/sgarikapati/go'
+##############################################################################
+# 7. Go
+##############################################################################
+export GOPATH="$HOME/go"
 export GOPROXY='http://athens.ingress.infra-prd.us-east-1.k8s.lyft.net,direct'
 export GONOSUMDB='github.com/lyft/*,github.lyft.net/*'
 export GONOSUM='github.com/lyft/*,github.lyft.net/*'
-export GO111MODULE='auto'
+export PATH="$GOPATH/bin:$PATH"
 
-export FZF_DEFAULT_COMMAND='fd . $HOME'
+##############################################################################
+# 8. mise — single version manager (Python, Node, Java)
+##############################################################################
+eval "$(mise activate zsh)"
+
+##############################################################################
+# 9. atuin — searchable shell history (replaces Ctrl-R)
+##############################################################################
+eval "$(atuin init zsh)"
+
+##############################################################################
+# 10. fzf
+##############################################################################
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS='-m --height 50% --border'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-#eval "$(/opt/lyft/brew/bin/aactivator init)"
-export PATH="/opt/homebrew/sbin:/Users/sgarikapati/.rd/bin:$GOPATH/bin:$PATH"
-export JAVA_HOME=$(/usr/libexec/java_home -v 11)
-### lyft_localdevtools_shell_rc start
-### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
+##############################################################################
+# 11. ripgrep config
+##############################################################################
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
+##############################################################################
+# 12. Plugins (syntax highlighting must be last, autosuggestions before it)
+##############################################################################
+source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+##############################################################################
+# 13. Lyft tooling — DO NOT REMOVE
+##############################################################################
 if [[ -f "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh" ]]; then
-    source "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
+  source "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
 fi
-### lyft_localdevtools_shell_rc end
-
-### lyft_rd_shell_rc start
-### DO NOT REMOVE: automatically installed as part of Rancher Desktop setup
-if [[ -f /Users/sgarikapati/.rd/shell_rc.sh ]]; then
-  source /Users/sgarikapati/.rd/shell_rc.sh
+if [[ -f "$HOME/.rd/shell_rc.sh" ]]; then
+  source "$HOME/.rd/shell_rc.sh"
 fi
-### lyft_rd_shell_rc end
-eval export PATH="/Users/sgarikapati/.jenv/shims:${PATH}"
-export JENV_SHELL=zsh
-export JENV_LOADED=1
-#npm config set registry https://artifactory.lyft.net/artifactory/api/npm/virtual-npm-lyft/
 
-### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
-eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
-alias ack="echo 'use rg'"
-#alias python=python3
+##############################################################################
+# 14. Aliases
+##############################################################################
+source "$HOME/.alias"
 
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+##############################################################################
+# 15. iTerm2 shell integration
+##############################################################################
+test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
 
-. "$HOME/.local/bin/env"
-export GOPATH=/Users/sgarikapati/go
-export PATH=$GOPATH/bin:$PATH
-export HOMEBREW_NO_AUTO_UPDATE=1
+##############################################################################
+# 16. Starship prompt — must be last
+##############################################################################
+eval "$(starship init zsh)"
